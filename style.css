@@ -398,37 +398,82 @@ nav {
   transition: 0.3s;
 }
 
+
+
+/* =========================================
+   MOBILE VERSION (Only triggers on phones)
+   PC Version above this line is SAFE.
+   ========================================= */
 @media (max-width: 768px) {
-  .burger {
-    display: block;
-  }
-  .nav-links {
-    position: absolute;
-    right: 0;
-    top: 0;
-    height: 100vh;
-    background: var(--bg-dark);
-    flex-direction: column;
-    width: 70%;
-    transform: translateX(100%);
-    transition: 0.5s;
-    justify-content: center;
-  }
-  .nav-links.nav-active {
-    transform: translateX(0);
-  }
+
+  /* 1. TAME THE GIANT TEXT */
   .hero h1 {
-    font-size: 2.5rem;
+    font-size: 2.5rem; /* On PC it's 4rem, this makes it readable on phone */
+    line-height: 1.2;
   }
-  .split-layout,
-  .contact-wrapper {
-    grid-template-columns: 1fr;
+  
+  .section-header h2 {
+    font-size: 2rem;
   }
-  .price-card.featured {
-    transform: scale(1);
+
+  /* 2. FIX THE "SQUASHED" COLUMNS */
+  /* This forces side-by-side elements to stack nicely on top of each other */
+  .services-wrapper, 
+  .pricing-grid, 
+  .portfolio-grid, 
+  .split-layout, 
+  .contact-wrapper, 
+  .stats-grid {
+    grid-template-columns: 1fr; /* Force 1 column */
+    gap: 40px;
+  }
+
+  /* 3. FIX THE NAVBAR (The biggest issue) */
+  .nav-links {
+    position: fixed;
+    right: 0px;
+    height: 100vh;
+    top: 0;
+    background-color: var(--bg-dark);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%; /* Full screen menu */
+    transform: translateX(100%); /* Hide it by default */
+    transition: transform 0.5s ease-in;
+    z-index: 999;
+  }
+
+  /* When JS adds this class, the menu slides in */
+  .nav-links.nav-active {
+    transform: translateX(0%);
+  }
+
+  .nav-links li {
+    opacity: 1; /* Make sure links are visible */
     margin: 20px 0;
   }
-  .logo img {
-    height: 60px;
+
+  /* Show the hamburger button (it's hidden on PC) */
+  .burger {
+    display: block;
+    z-index: 1000;
+  }
+
+  /* 4. REDUCE WHITE SPACE */
+  .section-padding {
+    padding: 60px 0; /* 100px is too much for phone */
+  }
+
+  .hero {
+    padding-top: 100px;
+    height: auto;
+    min-height: 90vh;
+  }
+  
+  /* 5. FIX OVERFLOW (Prevents side-scrolling) */
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
   }
 }
