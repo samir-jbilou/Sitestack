@@ -48,3 +48,47 @@ window.addEventListener("scroll", () => {
     logo.style.height = "85px";
   }
 });
+
+// --- FORM SUBMISSION ---
+const contactForm = document.getElementById('contactForm');
+
+if (contactForm) {
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault(); // Stop page reload
+
+    // 1. Get the button and change text
+    const submitBtn = contactForm.querySelector('button');
+    const originalText = submitBtn.innerText;
+    submitBtn.innerText = 'Sending...';
+    submitBtn.disabled = true;
+
+    // 2. Gather data
+    const formData = new FormData(contactForm);
+    const data = Object.fromEntries(formData.entries());
+
+    try {
+      // 3. Send to Backend
+      const response = await fetch('/api/server', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        alert('Message sent! We will contact you soon.');
+        contactForm.reset();
+      } else {
+        alert('Error: ' + (result.error || 'Something went wrong'));
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Failed to send message. Please try again.');
+    } finally {
+      // 4. Restore button
+      submitBtn.innerText = originalText;
+      submitBtn.disabled = false;
+    }
+  });
+}

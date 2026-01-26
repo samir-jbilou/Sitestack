@@ -309,15 +309,15 @@ const sitestack = {
           </div>
         </div>
 
-        <form class="contact-form" data-aos="fade-left">
+        <form class="contact-form" data-aos="fade-left" id="contactForm">
           <div class="form-group">
-            <input type="text" placeholder="Your Name" required />
+            <input type="text" name="name" placeholder="Your Name" required />
           </div>
           <div class="form-group">
-            <input type="email" placeholder="Your Email" required />
+            <input type="email" name="email" placeholder="Your Email" required />
           </div>
           <div class="form-group">
-            <select>
+            <select name="project_type">
               <option value="">Project Type</option>
               <option value="landing">Landing Page</option>
               <option value="business">Business Website</option>
@@ -327,6 +327,7 @@ const sitestack = {
           </div>
           <div class="form-group">
             <textarea
+              name="message"
               placeholder="Tell us about your project..."
               rows="5"
             ></textarea>
