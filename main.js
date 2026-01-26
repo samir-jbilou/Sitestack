@@ -92,3 +92,29 @@ if (contactForm) {
     }
   });
 }
+
+// --- SCROLL SPY LOGIC ---
+const sections = document.querySelectorAll("section[id]");
+const navLinksSpy = document.querySelectorAll(".nav-links li a");
+
+const options = {
+    threshold: 0.6 // Trigger when 60% of the section is visible
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+            navLinksSpy.forEach((link) => {
+                link.classList.remove("active");
+                // Match the section ID with the link href (e.g., #portfolio)
+                if (link.getAttribute("href").includes(entry.target.id)) {
+                    link.classList.add("active");
+                }
+            });
+        }
+    });
+}, options);
+
+sections.forEach((section) => {
+    observer.observe(section);
+});
