@@ -101,6 +101,26 @@ nav {
   }
 }
 
+@keyframes infinitePulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 114, 255, 0.4);
+    background-color: transparent;
+    color: var(--accent-solid);
+  }
+  50% {
+    /* The "Peak" - exactly like your original load animation */
+    background-color: var(--accent-solid);
+    color: #ffffff;
+    /* Strong glow */
+    box-shadow: 0 0 25px 8px rgba(0, 114, 255, 0.7);
+    /* I REMOVED 'letter-spacing' so it doesn't change size */
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 114, 255, 0.4);
+    background-color: transparent;
+    color: var(--accent-solid);
+  }
+}
 @keyframes pulseGlow {
   0% {
     box-shadow: 0 0 0 0 rgba(0, 114, 255, 0);
@@ -166,6 +186,29 @@ nav {
   transform: translateY(-3px); /* Lifts the button slightly */
   border-color: transparent; /* Hides the border to let the glow shine */
   transition: all 0.3s ease; /* Makes the transition smooth and fluid */
+}
+
+.nav-links li a.cta-btn.active {
+    /* 1. CRITICAL: Force opacity to 1 so it doesn't vanish */
+    opacity: 1 !important;
+    
+    /* 2. Apply the loop (2 seconds is usually the sweet spot) */
+    animation: infinitePulse 2s infinite ease-in-out !important;
+    
+    /* 3. Ensure no border conflict during the color swap */
+    border: 1px solid var(--accent-solid); 
+}
+
+.nav-links li a.cta-btn.active:hover {
+    animation-play-state: paused;
+    background-color: var(--accent-solid);
+    color: #ffffff;
+    box-shadow: 0 0 20px rgba(0, 114, 255, 0.6);
+}
+
+/* Hide the Scroll Spy underline specifically for the button */
+.nav-links li a.cta-btn.active::after {
+    display: none !important;
 }
 
 /* --- HERO --- */

@@ -93,21 +93,24 @@ if (contactForm) {
   });
 }
 
-// --- SCROLL SPY LOGIC ---
-const sections = document.querySelectorAll("section[id]");
+// --- IMPROVED SCROLL SPY ---
+const sections = document.querySelectorAll("section[id], header[id]"); // Include your header if it has id="home"
 const navLinksSpy = document.querySelectorAll(".nav-links li a");
 
 const options = {
-    threshold: 0.6 // Trigger when 60% of the section is visible
+    // This "shrinks" the detection area so sections are caught in the middle of the screen
+    rootMargin: "-30% 0px -70% 0px", 
+    threshold: 0 
 };
 
 const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
         if (entry.isIntersecting) {
+            const id = entry.target.getAttribute("id");
+            
             navLinksSpy.forEach((link) => {
                 link.classList.remove("active");
-                // Match the section ID with the link href (e.g., #portfolio)
-                if (link.getAttribute("href").includes(entry.target.id)) {
+                if (link.getAttribute("href") === `#${id}`) {
                     link.classList.add("active");
                 }
             });
