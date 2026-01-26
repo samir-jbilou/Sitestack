@@ -314,21 +314,25 @@ nav {
     filter: drop-shadow(0 0 0.2px var(--accent-solid))
             drop-shadow(0 0 0.2px rgba(72, 0, 255, 0.6));
   }
-  33% {
-    filter: drop-shadow(0 0 16px var(--accent-solid))
+  24% {
+    filter: drop-shadow(0 0 12px var(--accent-solid))
             drop-shadow(0 0 5px rgba(72, 0, 255, 0.6));
   }
-  42% {
+  35% {
     filter: drop-shadow(0 0 15px var(--accent-solid)) 
             drop-shadow(0 0 19px rgba(72, 0, 255, 0.6));
   }
-  70%{
+  52%{
     filter: drop-shadow(0 0 6px var(--accent-solid)) 
             drop-shadow(0 0 9px rgba(72, 0, 255, 0.6));
   }
-  88%{
+  68%{
     filter: drop-shadow(0 0 2px var(--accent-solid)) 
             drop-shadow(0 0 3px rgba(72, 0, 255, 0.6));
+  }
+  74% {
+    filter: drop-shadow(0 0 0.2px var(--accent-solid))
+            drop-shadow(0 0 0.2px rgba(72, 0, 255, 0.6));
   }
   100% {
     filter: drop-shadow(0 0 0.2px var(--accent-solid))
