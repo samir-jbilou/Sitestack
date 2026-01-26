@@ -103,24 +103,34 @@ nav {
 
 @keyframes infinitePulse {
   0% {
+    /* State: Transparent Blue */
     box-shadow: 0 0 0 0 rgba(0, 114, 255, 0.4);
     background-color: transparent;
     color: var(--accent-solid);
+    text-shadow: none; /* No text glow yet */
   }
   50% {
-    /* The "Peak" - exactly like your original load animation */
+    /* State: Solid Blue Box + Pure White Glowing Text */
     background-color: var(--accent-solid);
-    color: #ffffff;
-    /* Strong glow */
+    
+    /* The Box Glow */
     box-shadow: 0 0 25px 8px rgba(0, 114, 255, 0.7);
-    /* I REMOVED 'letter-spacing' so it doesn't change size */
+    
+    /* The Text Color (Pure White) */
+    color: #ffffff !important; 
+    
+    /* The Text Glow (White Halo around letters) */
+    text-shadow: 0 0 8px #ffffff; 
   }
   100% {
+    /* Return to Transparent Blue */
     box-shadow: 0 0 0 0 rgba(0, 114, 255, 0.4);
     background-color: transparent;
     color: var(--accent-solid);
+    text-shadow: none;
   }
 }
+
 @keyframes pulseGlow {
   0% {
     box-shadow: 0 0 0 0 rgba(0, 114, 255, 0);
@@ -170,7 +180,7 @@ nav {
   border: 1px solid var(--accent-solid);
   padding: 8px 18px;
   border-radius: 4px;
-  color: var(--accent-solid) !important;
+  color: var(--accent-solid);
   opacity: 0;
   color: var(--accent-solid); /* Ensure starting color is your accent blue */
   animation: fadeInLogo 1s ease forwards, pulseGlow 1.5s ease-out forwards;
