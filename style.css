@@ -205,7 +205,7 @@ nav {
     opacity: 1 !important;
     
     /* 2. Apply the loop (2 seconds is usually the sweet spot) */
-    animation: infinitePulse 4s infinite ease-in-out !important;
+    animation: infinitePulse 2.32s infinite ease-in-out !important;
     
     /* 3. Ensure no border conflict during the color swap */
     border: 1px solid var(--accent-solid); 
