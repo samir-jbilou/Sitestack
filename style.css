@@ -409,9 +409,13 @@ nav {
   left: 0;
   width: 100%;
   padding: 20px;
-  background: linear-gradient(to top, rgba(11, 17, 32, 0.95), transparent);
+  /* This gradient makes the text readable */
+  background: linear-gradient(to top, rgb(11, 17, 32), transparent);
   transform: translateY(10px);
   transition: 0.3s;
+  
+  /* NEW: This must be higher than the image z-index (which is 2) */
+  z-index: 10;
 }
 .project-item:hover .p-overlay {
   transform: translateY(0);
@@ -585,4 +589,50 @@ nav {
     overflow-x: hidden;
     width: 100%;
   }
+}
+
+/* --- INFINITE SCREENSHOT LOOP --- */
+
+/* 1. The Container: Needs relative positioning to hold the stacked images */
+.loop-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* Ensures images don't spill out */
+}
+
+/* 2. The Images: Absolute positioning creates the "stack" */
+.loop-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures screenshots fill the box nicely */
+  transition: transform 0.5s ease; /* Keeps the hover zoom effect */
+}
+
+/* 3. The Animation Logic */
+/* Image 1 is the "Base" - it stays static behind everything */
+.img-1 {
+  z-index: 1; 
+}
+
+/* Image 2 sits ON TOP and fades in and out */
+.img-2 {
+  z-index: 2;
+  animation: fadeLoop 6s infinite ease-in-out;
+}
+
+/* 4. The Keyframes (Controls the timing) */
+@keyframes fadeLoop {
+  0% { opacity: 0; }     /* Show Image 1 */
+  45% { opacity: 1; }    /* Show Image 2 */
+  55% { opacity: 1; }    /* Stay on Image 2 for a bit */
+  100% { opacity: 0; }   /* Fade back to Image 1 */
+}
+
+/* 5. Keep your existing Hover Zoom Effect */
+.project-item:hover .loop-img {
+  transform: scale(1.1); /* Zooms BOTH images together */
 }
